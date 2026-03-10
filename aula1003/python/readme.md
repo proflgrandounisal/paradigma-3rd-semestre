@@ -6,7 +6,7 @@ Os quatro códigos Python ilustram as etapas de desenvolvimento de software, des
 
 ---
 
-## Estágio 1: O Procedural Clássico (`procedura.py`)
+## Estágio 1: O Procedural Clássico (`01_procedural_classico.py`)
 
 No primeiro estágio, abolimos as variáveis globais. O estado do sistema nasce no fluxo principal e é transmitido para os subprogramas através da passagem de parâmetros. 
 
@@ -18,7 +18,7 @@ A função causa uma mutação direta no estado externo (Efeito Colateral) de fo
 
 ---
 
-## Estágio 2: A Evolução do Fluxo com Corrotinas (`corrotinas.py`)
+## Estágio 2: A Evolução do Fluxo com Corrotinas (`02_corrotinas_yield.py`)
 
 Neste estágio, rompemos a limitação do controle de fluxo tradicional, onde uma função precisa ser executada do início ao fim (run-to-completion) para devolver um resultado.
 
@@ -30,7 +30,7 @@ Esta é a base arquitetural para a *Avaliação Preguiçosa* (Lazy Evaluation), 
 
 ---
 
-## Estágio 3: A Crise do Estado (`limiteprocedural.py`)
+## Estágio 3: A Crise do Estado (`03_crise_do_estado.py`)
 
 Este é o limite físico e lógico do Paradigma Procedural. Em sistemas de grande porte, as estruturas de dados tornam-se complexas.
 
@@ -40,7 +40,7 @@ Se adicionarmos novos elementos (como clima, passageiros, rotas), a assinatura d
 
 ---
 
-## Estágio 4: A Transição para a Orientação a Objetos (`orientadoobjetos.py`)
+## Estágio 4: A Transição para a Orientação a Objetos (`04_orientacao_objetos.py`)
 
 O último estágio apresenta a solução arquitetural de Engenharia de Software para a Crise do Estado demonstrada no arquivo anterior.
 
@@ -50,6 +50,19 @@ O estado interno do veículo agora é protegido. A função `registrar_viagem` n
 Este isolamento elimina o acoplamento frágil e oculta a complexidade do mundo externo, inaugurando o conceito de **Encapsulamento** que estudaremos a fundo no Paradigma Orientado a Objetos.
 
 
+
+---
+
+## Adendo Arquitetural: Onde está o `return`?
+
+Ao analisar os códigos dos Estágios 1, 3 e 4, nota-se a ausência intencional do comando `return` nas rotinas que processam os dados. Isso ilustra a diferença fundamental entre **Funções Puras** e **Procedimentos** na engenharia de software:
+
+* **Função Pura (Usa `return`):** Recebe valores imutáveis (Passagem por Valor / *In Mode*), realiza um cálculo isolado e devolve um valor inteiramente novo, sem alterar nada no sistema.
+* **Procedimento (Não usa `return`):** Recebe a referência de um objeto na memória (Passagem por Referência / *Inout Mode*). O seu propósito não é criar uma nova resposta, mas sim causar uma **mutação de estado** (efeito colateral) no objeto existente. 
+
+
+
+No Python, como dicionários são objetos mutáveis (*Call-by-sharing*), a instrução de subtração (ex: `conta['saldo'] -= valor`) altera fisicamente o espaço de memória original. O fluxo principal enxerga essa atualização imediatamente. Tentar "devolver" o dicionário modificado seria um erro conceitual e uma redundância arquitetural. Na Orientação a Objetos (Estágio 4), o comportamento é idêntico: o objeto altera a si mesmo via `self` e não precisa retornar o seu próprio estado modificado.
 
 ---
 **Instruções de Estudo:** Execute os arquivos sequencialmente e observe a evolução das assinaturas das funções. O código final em POO realiza exatamente a mesma tarefa do Estágio 3, mas com uma arquitetura resistente a falhas de acoplamento.
